@@ -1,0 +1,284 @@
+[
+  [
+    {
+      "label": "1",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "2",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "ABC"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "3",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "DEF"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "-",
+      "type": "function",
+      "labelFlags": 1073742400,
+      "popup": {
+        "main": {
+          "label": "+"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "1",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "2",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "ABC"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "3",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "DEF"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "-",
+      "type": "function",
+      "labelFlags": 1073742400,
+      "popup": {
+        "main": {
+          "label": "+"
+        }
+      },
+      "width": 0.125
+    }
+  ],
+  [
+    {
+      "label": "4",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "GHI"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "5",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "JKL"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "6",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "MNO"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "space",
+      "type": "function",
+      "width": 0.125
+    },
+    {
+      "label": "4",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "GHI"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "5",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "JKL"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "6",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "MNO"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "space",
+      "type": "function",
+      "width": 0.125
+    }
+  ],
+  [
+    {
+      "label": "7",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "PQRS"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "8",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "TUV"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "9",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "WXYZ"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "delete",
+      "width": 0.125
+    },
+    {
+      "label": "7",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "PQRS"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "8",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "TUV"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "9",
+      "type": "numeric",
+      "popup": {
+        "main": {
+          "label": "WXYZ"
+        }
+      },
+      "width": 0.125
+    },
+    {
+      "label": "delete",
+      "width": 0.125
+    }
+  ],
+  [
+    {
+      "label": "＊＃|!code/key_switch_alpha_symbol",
+      "type": "numeric",
+      "labelFlags": 524432,
+      "width": 0.125
+    },
+    {
+      "label": "0 +|0",
+      "type": "numeric",
+      "popup": {
+        "relevant": [
+          {
+            "label": "!noPanelAutoPopupKey!"
+          },
+          {
+            "label": "+"
+          }
+        ]
+      },
+      "width": 0.125
+    },
+    {
+      "label": ".",
+      "type": "numeric",
+      "labelFlags": 1073741888,
+      "groupId": 1,
+      "width": 0.125
+    },
+    {
+      "label": "action",
+      "width": 0.125
+    },
+    {
+      "label": "＊＃|!code/key_switch_alpha_symbol",
+      "type": "numeric",
+      "labelFlags": 524432,
+      "width": 0.125
+    },
+    {
+      "label": "0 +|0",
+      "type": "numeric",
+      "popup": {
+        "relevant": [
+          {
+            "label": "!noPanelAutoPopupKey!"
+          },
+          {
+            "label": "+"
+          }
+        ]
+      },
+      "width": 0.125
+    },
+    {
+      "label": ".",
+      "type": "numeric",
+      "labelFlags": 1073741888,
+      "groupId": 1,
+      "width": 0.125
+    },
+    {
+      "label": "action",
+      "width": 0.125
+    }
+  ]
+]

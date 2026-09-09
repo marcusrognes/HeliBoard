@@ -13,9 +13,9 @@
     { "label": "action", "width": 0.1, "labelFlags": 1073741824 }
   ],
   [
-    { "label": "shift", "width": 0.1 },
+    { "label": "shift", "width": 0.05 },
     { "type": "placeholder" },
-    { "label": "shift" }
+    { "label": "shift", "width": 0.18 }
   ],
   [
     { "label": "symbol_alpha" },

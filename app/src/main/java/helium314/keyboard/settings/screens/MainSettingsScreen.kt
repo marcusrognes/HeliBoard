@@ -24,6 +24,13 @@ import helium314.keyboard.latin.utils.NextScreenIcon
 import helium314.keyboard.settings.SearchSettingsScreen
 import helium314.keyboard.latin.utils.Theme
 import helium314.keyboard.settings.initPreview
+import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.KeyboardType
+import helium314.keyboard.settings.dialogs.TextInputDialog
 import helium314.keyboard.settings.preferences.Preference
 import helium314.keyboard.latin.utils.previewDark
 import helium314.keyboard.settings.screens.gesturedata.END_DATE_EPOCH_MILLIS
@@ -108,6 +115,9 @@ fun MainSettingsScreen(
                     onClick = onClickAdvanced,
                     icon = R.drawable.ic_settings_advanced
                 ) { NextScreenIcon() }
+                InputTesterPreference(R.string.input_tester_text, KeyboardType.Text)
+                InputTesterPreference(R.string.input_tester_number, KeyboardType.Number)
+                InputTesterPreference(R.string.input_tester_phone, KeyboardType.Phone)
                 Preference(
                     name = stringResource(R.string.settings_screen_about),
                     onClick = onClickAbout,
@@ -115,6 +125,29 @@ fun MainSettingsScreen(
                 ) { NextScreenIcon() }
             }
         }
+    }
+}
+
+// ponytail: reuses TextInputDialog, which already focuses the field and raises the keyboard.
+// Confirm/dismiss both just close it -- the typing is the whole point, the text is throwaway.
+@Composable
+private fun InputTesterPreference(nameResId: Int, keyboardType: KeyboardType) {
+    var showDialog by rememberSaveable { mutableStateOf(false) }
+    Preference(
+        name = stringResource(nameResId),
+        onClick = { showDialog = true },
+        icon = R.drawable.ic_settings_layout
+    )
+    if (showDialog) {
+        TextInputDialog(
+            onDismissRequest = { showDialog = false },
+            onConfirmed = { },
+            title = { Text(stringResource(nameResId)) },
+            description = { Text(stringResource(R.string.input_tester_summary)) },
+            singleLine = false,
+            keyboardType = keyboardType,
+            checkTextValid = { true }
+        )
     }
 }
 

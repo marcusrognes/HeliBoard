@@ -36,6 +36,10 @@ object Defaults {
         LayoutType.NUMBER_ROW -> "number_row"
         LayoutType.NUMPAD -> "numpad"
         LayoutType.NUMPAD_LANDSCAPE -> "numpad_landscape"
+        LayoutType.NUMPAD_DUAL -> "numpad_dual"
+        LayoutType.NUMBER_DUAL -> "number_dual"
+        LayoutType.PHONE_DUAL -> "phone_dual"
+        LayoutType.PHONE_SYMBOLS_DUAL -> "phone_symbols_dual"
         LayoutType.DPAD -> "dpad"
         LayoutType.PHONE -> "phone"
         LayoutType.PHONE_SYMBOLS -> "phone_symbols"
@@ -85,6 +89,7 @@ object Defaults {
     const val PREF_ENABLE_SPLIT_KEYBOARD = false
     @JvmField
     val PREF_SPLIT_SPACER_SCALE = Array(4) { DEFAULT_SIZE_SCALE }
+    const val PREF_SPLIT_ANCHORS = "6,t,g,b" // last key of the left half in each row
     @JvmField
     val PREF_KEYBOARD_HEIGHT_SCALE = Array(4) { DEFAULT_SIZE_SCALE }
     @JvmField

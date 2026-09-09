@@ -249,6 +249,10 @@ fun createAppearanceSettings(context: Context) = listOf(
             description = { "${(100 * it).toInt()}%" }
         ) { KeyboardSwitcher.getInstance().setThemeNeedsReload() }
     },
+    Setting(context, Settings.PREF_SPLIT_ANCHORS, R.string.split_anchors) { setting ->
+        // anything that matches no key just falls back to the geometric split, so no validation needed
+        TextInputPreference(setting, Defaults.PREF_SPLIT_ANCHORS, stringResource(R.string.split_anchors_detail))
+    },
     Setting(context, Settings.PREF_KEY_GAP_SCALE_PREFIX, R.string.prefs_key_gap_scale) { setting ->
         KeyboardScalePreference(
             name = setting.title,

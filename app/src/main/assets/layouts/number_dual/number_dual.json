@@ -1,0 +1,344 @@
+[
+  [
+    {
+      "label": "1",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "2",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "3",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "-",
+      "type": "function",
+      "popup": {
+        "main": {
+          "label": "+"
+        }
+      },
+      "labelFlags": 64,
+      "width": 0.125
+    },
+    {
+      "label": "1",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "2",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "3",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "-",
+      "type": "function",
+      "popup": {
+        "main": {
+          "label": "+"
+        }
+      },
+      "labelFlags": 64,
+      "width": 0.125
+    }
+  ],
+  [
+    {
+      "label": "4",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "5",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "6",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "space",
+      "type": "function",
+      "width": 0.125
+    },
+    {
+      "label": "4",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "5",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "6",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "space",
+      "type": "function",
+      "width": 0.125
+    }
+  ],
+  [
+    {
+      "label": "7",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "8",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "9",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "delete",
+      "width": 0.125
+    },
+    {
+      "label": "7",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "8",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "9",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "label": "delete",
+      "width": 0.125
+    }
+  ],
+  [
+    {
+      "$": "variation_selector",
+      "default": {
+        "label": ",",
+        "type": "numeric",
+        "groupId": 1,
+        "width": 0.125
+      },
+      "date": {
+        "label": ".",
+        "type": "numeric",
+        "groupId": 1,
+        "width": 0.125
+      },
+      "time": {
+        "label": ".",
+        "type": "numeric",
+        "groupId": 1,
+        "popup": {
+          "relevant": [
+            {
+              "label": "!fixedColumnOrder!2"
+            },
+            {
+              "label": "!hasLabels!"
+            },
+            {
+              "label": "AM"
+            },
+            {
+              "label": "PM"
+            }
+          ]
+        },
+        "width": 0.125
+      },
+      "datetime": {
+        "label": ".",
+        "type": "numeric",
+        "groupId": 1,
+        "popup": {
+          "relevant": [
+            {
+              "label": "!fixedColumnOrder!2"
+            },
+            {
+              "label": "!hasLabels!"
+            },
+            {
+              "label": "AM"
+            },
+            {
+              "label": "PM"
+            }
+          ]
+        },
+        "width": 0.125
+      }
+    },
+    {
+      "label": "0",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "$": "variation_selector",
+      "default": {
+        "label": ".",
+        "type": "numeric",
+        "labelFlags": 1073741824,
+        "width": 0.125
+      },
+      "date": {
+        "label": "/",
+        "type": "numeric",
+        "width": 0.125
+      },
+      "time": {
+        "label": ":",
+        "type": "numeric",
+        "width": 0.125
+      },
+      "datetime": {
+        "label": "/ :|/",
+        "type": "numeric",
+        "popup": {
+          "relevant": [
+            {
+              "label": "!noPanelAutoPopupKey!"
+            },
+            {
+              "label": ","
+            }
+          ]
+        },
+        "width": 0.125
+      }
+    },
+    {
+      "label": "enter",
+      "width": 0.125
+    },
+    {
+      "$": "variation_selector",
+      "default": {
+        "label": ",",
+        "type": "numeric",
+        "groupId": 1,
+        "width": 0.125
+      },
+      "date": {
+        "label": ".",
+        "type": "numeric",
+        "groupId": 1,
+        "width": 0.125
+      },
+      "time": {
+        "label": ".",
+        "type": "numeric",
+        "groupId": 1,
+        "popup": {
+          "relevant": [
+            {
+              "label": "!fixedColumnOrder!2"
+            },
+            {
+              "label": "!hasLabels!"
+            },
+            {
+              "label": "AM"
+            },
+            {
+              "label": "PM"
+            }
+          ]
+        },
+        "width": 0.125
+      },
+      "datetime": {
+        "label": ".",
+        "type": "numeric",
+        "groupId": 1,
+        "popup": {
+          "relevant": [
+            {
+              "label": "!fixedColumnOrder!2"
+            },
+            {
+              "label": "!hasLabels!"
+            },
+            {
+              "label": "AM"
+            },
+            {
+              "label": "PM"
+            }
+          ]
+        },
+        "width": 0.125
+      }
+    },
+    {
+      "label": "0",
+      "type": "numeric",
+      "width": 0.125
+    },
+    {
+      "$": "variation_selector",
+      "default": {
+        "label": ".",
+        "type": "numeric",
+        "labelFlags": 1073741824,
+        "width": 0.125
+      },
+      "date": {
+        "label": "/",
+        "type": "numeric",
+        "width": 0.125
+      },
+      "time": {
+        "label": ":",
+        "type": "numeric",
+        "width": 0.125
+      },
+      "datetime": {
+        "label": "/ :|/",
+        "type": "numeric",
+        "popup": {
+          "relevant": [
+            {
+              "label": "!noPanelAutoPopupKey!"
+            },
+            {
+              "label": ","
+            }
+          ]
+        },
+        "width": 0.125
+      }
+    },
+    {
+      "label": "enter",
+      "width": 0.125
+    }
+  ]
+]

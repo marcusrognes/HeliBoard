@@ -788,6 +788,17 @@ New dictionary:
     <string name="discussion_section_link">"discussion section"</string>
     <!-- Settings screen title for about -->
     <string name="settings_screen_about">About</string>
+    <!-- Input tester: fields for trying out the keyboard without leaving settings -->
+    <string name="layout_numpad_dual">Numpad (split, one per thumb)</string>
+    <string name="split_anchors">Split anchor keys</string>
+    <string name="split_anchors_detail">Comma-separated keys, each the last key of the left half in its row. Rows with no match use the automatic centre split.</string>
+    <string name="layout_number_dual">Number (split, one per thumb)</string>
+    <string name="layout_phone_dual">Phone (split, one per thumb)</string>
+    <string name="layout_phone_symbols_dual">Phone symbols (split, one per thumb)</string>
+    <string name="input_tester_text">Test input: text</string>
+    <string name="input_tester_number">Test input: number</string>
+    <string name="input_tester_phone">Test input: phone</string>
+    <string name="input_tester_summary">Type here to try the current layout. Text is discarded.</string>
     <!-- version for about screen -->
     <string name="version">Version</string>
     <!-- github repo link for about screen -->

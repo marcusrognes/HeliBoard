@@ -124,6 +124,8 @@ enum class KeyboardElement(val descriptionResId: Int) {
     val isAlphabetShifted get() = isAlphabet && this != ALPHABET
     val isAlphabetShiftedManually get() = this == ALPHABET_MANUAL_SHIFTED || this == ALPHABET_SHIFT_LOCKED
     val isNumberLayout get() = this in NUMPAD..PHONE_SYMBOLS
+    // number layouts get a spacer too, but only the dual variants, which are what split mode selects
+    val isSplittable get() = this in ALPHABET..SYMBOLS_SHIFTED || this in NUMPAD..PHONE_SYMBOLS
     val takesFunctionalKeys get() = this <= DPAD
     val isEmojiLayout get() = this in EMOJI_RECENTS..EMOJI_EMOTICONS
     val isBottomRow get() = this == EMOJI_BOTTOM_ROW || this == CLIPBOARD_BOTTOM_ROW

@@ -38,6 +38,8 @@ import helium314.keyboard.latin.utils.SubtypeSettings;
 import helium314.keyboard.latin.utils.SubtypeUtilsKt;
 import helium314.keyboard.latin.utils.ToolbarMode;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
@@ -117,6 +119,7 @@ public class SettingsValues {
     public final boolean mEnableEmojiAltPhysicalKey;
     public final boolean mIsSplitKeyboardEnabled;
     public final float mSplitKeyboardSpacerRelativeWidth;
+    public final List<String> mSplitAnchors;
     public final boolean mQuickPinToolbarKeys;
     public final boolean mAddToPersonalDictionary;
     public final boolean mUseContactsDictionary;
@@ -245,6 +248,14 @@ public class SettingsValues {
         mSplitKeyboardSpacerRelativeWidth = mIsSplitKeyboardEnabled
                 ? Math.min(Math.max((displayWidthDp - 600) / 600f + 0.15f, 0.15f), 0.35f) * Settings.readSplitSpacerScale(prefs, isLandscape, isFolded)
                 : 0f;
+        final String splitAnchors = prefs.getString(Settings.PREF_SPLIT_ANCHORS, Defaults.PREF_SPLIT_ANCHORS);
+        final List<String> anchors = new ArrayList<>();
+        for (final String s : (splitAnchors == null ? "" : splitAnchors).split(",")) {
+            final String t = s.trim();
+            if (!t.isEmpty()) anchors.add(t);
+        }
+        // empty list simply matches nothing, so KeyboardBuilder falls back to the geometric rule
+        mSplitAnchors = Collections.unmodifiableList(anchors);
         mQuickPinToolbarKeys = mToolbarMode == ToolbarMode.EXPANDABLE && prefs.getBoolean(Settings.PREF_QUICK_PIN_TOOLBAR_KEYS, Defaults.PREF_QUICK_PIN_TOOLBAR_KEYS);
 
         // Compute other readable settings

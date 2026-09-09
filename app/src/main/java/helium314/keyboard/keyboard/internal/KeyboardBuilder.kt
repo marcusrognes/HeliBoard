@@ -101,8 +101,7 @@ open class KeyboardBuilder<KP : KeyboardParams>(protected val mContext: Context,
     }
 
     open fun build(): Keyboard {
-        if (mParams.mId.isSplitLayout
-                && mParams.mId.element in KeyboardElement.ALPHABET..KeyboardElement.SYMBOLS_SHIFTED) {
+        if (mParams.mId.isSplitLayout && mParams.mId.element.isSplittable) {
             addSplit()
         }
         addKeysToParams()
@@ -126,6 +125,10 @@ open class KeyboardBuilder<KP : KeyboardParams>(protected val mContext: Context,
     }
 
     private fun addSplit() {
+        // anchors are letters/digits of the alphabet layout; on a number layout the "6" anchor would
+        // match the 6 in "4 5 6 space 4 5 6 space" and split it in the wrong place, so use geometry there
+        val useAnchors = mParams.mId.element in KeyboardElement.ALPHABET..KeyboardElement.SYMBOLS_SHIFTED
+        val anchors = Settings.getValues().mSplitAnchors
         val spacerRelativeWidth = Settings.getValues().mSplitKeyboardSpacerRelativeWidth
         // adjust gaps for the whole keyboard, so it's the same for all rows
         mParams.mRelativeHorizontalGap *= 1f / (1f + spacerRelativeWidth)
@@ -136,15 +139,21 @@ open class KeyboardBuilder<KP : KeyboardParams>(protected val mContext: Context,
             val y = row.first().yPos // all have the same y, so this is fine
             val relativeWidthSum = row.sumOf { it.mWidth } // sum up relative widths
             val spacer = KeyParams.newSpacer(mParams, spacerRelativeWidth)
+            // insert spacer after the first anchor key in the row, so the split point follows the
+            // layout instead of the row width; rows without an anchor (symbols) keep the old rule:
             // insert spacer before first key that starts right of the center (also consider gap)
-            var insertIndex = row.indexOfFirst { it.xPos + it.mAbsoluteWidth / 3 > mParams.mOccupiedWidth / 2 }
-                .takeIf { it > -1 } ?: (row.size / 2) // fallback should never be needed, but better than having an error
+            var insertIndex = (row.indexOfFirst { useAnchors && it.matchesSplitAnchor(anchors) }.takeIf { it > -1 }?.plus(1)
+                ?: row.indexOfFirst { it.xPos + it.mAbsoluteWidth / 3 > mParams.mOccupiedWidth / 2 }
+                    .takeIf { it > -1 } ?: (row.size / 2)) // fallback should never be needed, but better than having an error
+                .coerceIn(0, row.size) // an out-of-range index would crash every layout build
             val indexOfProperSpace = row.indexOfFirst { key ->
                 // should work reasonably with customizable layouts, where space key might be completely different:
                 // "normal" width space keys are ignored, and the possibility of space being first in row is considered
                 key.mCode == Constants.CODE_SPACE && key.mWidth > row.first { !it.isSpacer && it.mCode != Constants.CODE_SPACE }.mWidth * 1.5f
             }
             if (indexOfProperSpace >= 0) {
+                // hook point for anchoring the bottom row: this overrides insertIndex unconditionally,
+                // splitting the wide space key in two. Deliberately left as-is.
                 val spaceLeft = row[indexOfProperSpace]
                 reduceSymbolAndActionKeyWidth(row)
                 insertIndex = row.indexOf(spaceLeft) + 1
@@ -183,6 +192,13 @@ open class KeyboardBuilder<KP : KeyboardParams>(protected val mContext: Context,
                 currentX += it.mAbsoluteWidth
             }
         }
+    }
+
+    // matches on label, falling back to the key code, so it still works while shift is active
+    private fun KeyParams.matchesSplitAnchor(anchors: List<String>): Boolean {
+        if (isSpacer) return false
+        val label = mLabel ?: if (Character.isValidCodePoint(mCode)) String(Character.toChars(mCode)) else return false
+        return anchors.any { it.equals(label, ignoreCase = true) }
     }
 
     // reduce width of symbol and action key if in the (to be split) row, and add this width to space to keep other key size constant

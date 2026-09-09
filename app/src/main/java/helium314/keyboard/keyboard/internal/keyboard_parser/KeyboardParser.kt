@@ -50,10 +50,16 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
         val layoutType = when (params.mId.element) {
             KeyboardElement.SYMBOLS -> LayoutType.SYMBOLS
             KeyboardElement.SYMBOLS_SHIFTED -> LayoutType.MORE_SYMBOLS
-            KeyboardElement.PHONE -> LayoutType.PHONE
-            KeyboardElement.PHONE_SYMBOLS -> LayoutType.PHONE_SYMBOLS
-            KeyboardElement.NUMBER -> LayoutType.NUMBER
-            KeyboardElement.NUMPAD -> if (Settings.getValues().mDisplayOrientation == Configuration.ORIENTATION_LANDSCAPE)
+            KeyboardElement.PHONE -> if (Settings.getValues().mIsSplitKeyboardEnabled) LayoutType.PHONE_DUAL
+                else LayoutType.PHONE
+            KeyboardElement.PHONE_SYMBOLS -> if (Settings.getValues().mIsSplitKeyboardEnabled) LayoutType.PHONE_SYMBOLS_DUAL
+                else LayoutType.PHONE_SYMBOLS
+            KeyboardElement.NUMBER -> if (Settings.getValues().mIsSplitKeyboardEnabled) LayoutType.NUMBER_DUAL
+                else LayoutType.NUMBER
+            // ponytail: one dual layout for both orientations. Split mode already implies a wide
+            // screen, so a landscape-specific dual variant can wait until it actually looks wrong.
+            KeyboardElement.NUMPAD -> if (Settings.getValues().mIsSplitKeyboardEnabled) LayoutType.NUMPAD_DUAL
+                else if (Settings.getValues().mDisplayOrientation == Configuration.ORIENTATION_LANDSCAPE)
                 LayoutType.NUMPAD_LANDSCAPE else LayoutType.NUMPAD
             KeyboardElement.DPAD -> LayoutType.DPAD
             KeyboardElement.EMOJI_BOTTOM_ROW -> LayoutType.EMOJI_BOTTOM
@@ -93,7 +99,9 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
     private fun createRows(baseKeys: MutableList<MutableList<KeyData>>): ArrayList<ArrayList<KeyParams>> {
         // add padding for number layouts in landscape mode (maybe do it some other way later)
         val element = params.mId.element
+        // the dual layouts span the full width by design, so this 10% side padding is just dead space
         if (element.isNumberLayout && element != KeyboardElement.NUMPAD
+                && !Settings.getValues().mIsSplitKeyboardEnabled
                 && context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             params.mLeftPadding = (params.mOccupiedWidth * 0.1f).toInt()
             params.mRightPadding = (params.mOccupiedWidth * 0.1f).toInt()
