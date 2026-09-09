@@ -790,6 +790,9 @@ New dictionary:
     <string name="settings_screen_about">About</string>
     <!-- Input tester: fields for trying out the keyboard without leaving settings -->
     <string name="layout_numpad_dual">Numpad (split, one per thumb)</string>
+    <string name="split_half_width">Max width per split half</string>
+    <string name="keyboard_height_dp">Fixed keyboard height</string>
+    <string name="size_dp_off">Off (scale with display)</string>
     <string name="split_anchors">Split anchor keys</string>
     <string name="split_anchors_detail">Comma-separated keys, each the last key of the left half in its row. Rows with no match use the automatic centre split.</string>
     <string name="layout_number_dual">Number (split, one per thumb)</string>

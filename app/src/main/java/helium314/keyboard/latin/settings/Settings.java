@@ -25,6 +25,7 @@ import androidx.annotation.StringRes;
 import helium314.keyboard.compat.ConfigurationCompatKt;
 import helium314.keyboard.keyboard.KeyboardActionListener;
 import helium314.keyboard.keyboard.internal.PopupKeySpec;
+import helium314.keyboard.latin.common.Constants;
 import helium314.keyboard.latin.AudioAndHapticFeedbackManager;
 import helium314.keyboard.latin.InputAttributes;
 import helium314.keyboard.latin.PunctuationSuggestions;
@@ -100,6 +101,8 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final String PREF_ENABLE_SPLIT_KEYBOARD_FOLDED_LANDSCAPE = "split_keyboard_folded_landscape";
     public static final String PREF_SPLIT_SPACER_SCALE_PREFIX = "split_spacer_scale";
     public static final String PREF_SPLIT_ANCHORS = "split_anchors";
+    public static final String PREF_SPLIT_HALF_WIDTH_DP = "split_half_width_dp";
+    public static final String PREF_KEYBOARD_HEIGHT_DP = "keyboard_height_dp";
     public static final String PREF_KEYBOARD_HEIGHT_SCALE_PREFIX = "keyboard_height_scale";
     public static final String PREF_BOTTOM_ROW_SCALE_PREFIX = "bottom_row_scale";
     public static final String PREF_BOTTOM_PADDING_SCALE_PREFIX = "bottom_padding_scale";
@@ -536,7 +539,11 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     }
 
     public boolean isTablet() {
-        return mContext.getResources().getInteger(R.integer.config_screen_metrics) >= 3;
+        // note SCREEN_METRICS_LARGE_TABLET is 2 and SMALL_TABLET is 3, so ">= 3" matched small
+        // tablets only -- a large tablet (sw768dp, e.g. a 12" Galaxy Tab) fell through as a phone
+        final int metrics = mContext.getResources().getInteger(R.integer.config_screen_metrics);
+        return metrics == Constants.SCREEN_METRICS_SMALL_TABLET
+                || metrics == Constants.SCREEN_METRICS_LARGE_TABLET;
     }
 
     @SuppressLint("DiscouragedApi")

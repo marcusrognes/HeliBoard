@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.util.Xml
 import androidx.annotation.XmlRes
+import androidx.core.util.TypedValueCompat
 import helium314.keyboard.keyboard.Key
 import helium314.keyboard.keyboard.Key.KeyParams
 import helium314.keyboard.keyboard.Keyboard
@@ -129,7 +130,13 @@ open class KeyboardBuilder<KP : KeyboardParams>(protected val mContext: Context,
         // match the 6 in "4 5 6 space 4 5 6 space" and split it in the wrong place, so use geometry there
         val useAnchors = mParams.mId.element in KeyboardElement.ALPHABET..KeyboardElement.SYMBOLS_SHIFTED
         val anchors = Settings.getValues().mSplitAnchors
-        val spacerRelativeWidth = Settings.getValues().mSplitKeyboardSpacerRelativeWidth
+        val sv = Settings.getValues()
+        // cap each half at a physical width by widening the centre gap, so the halves stay under
+        // the thumbs. Only ever shrinks: on a narrow screen the normal spacer setting applies.
+        val maxKeysPx = if (sv.mSplitHalfWidthDp > 0)
+            TypedValueCompat.dpToPx(2f * sv.mSplitHalfWidthDp, mResources.displayMetrics) else 0f
+        val spacerRelativeWidth = if (maxKeysPx > 0f && mParams.mBaseWidth > maxKeysPx)
+            mParams.mBaseWidth / maxKeysPx - 1f else sv.mSplitKeyboardSpacerRelativeWidth
         // adjust gaps for the whole keyboard, so it's the same for all rows
         mParams.mRelativeHorizontalGap *= 1f / (1f + spacerRelativeWidth)
         mParams.mHorizontalGap = (mParams.mRelativeHorizontalGap * mParams.mId.width).toInt()

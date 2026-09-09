@@ -90,6 +90,8 @@ object Defaults {
     @JvmField
     val PREF_SPLIT_SPACER_SCALE = Array(4) { DEFAULT_SIZE_SCALE }
     const val PREF_SPLIT_ANCHORS = "6,t,g,b" // last key of the left half in each row
+    const val PREF_SPLIT_HALF_WIDTH_DP = 0 // max dp per split half; 0 = no limit (stretch to fit)
+    const val PREF_KEYBOARD_HEIGHT_DP = 0 // fixed dp height; 0 = per-device resource default
     @JvmField
     val PREF_KEYBOARD_HEIGHT_SCALE = Array(4) { DEFAULT_SIZE_SCALE }
     @JvmField

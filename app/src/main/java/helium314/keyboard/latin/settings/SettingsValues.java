@@ -120,6 +120,8 @@ public class SettingsValues {
     public final boolean mIsSplitKeyboardEnabled;
     public final float mSplitKeyboardSpacerRelativeWidth;
     public final List<String> mSplitAnchors;
+    public final int mSplitHalfWidthDp;
+    public final int mKeyboardHeightDp;
     public final boolean mQuickPinToolbarKeys;
     public final boolean mAddToPersonalDictionary;
     public final boolean mUseContactsDictionary;
@@ -256,6 +258,8 @@ public class SettingsValues {
         }
         // empty list simply matches nothing, so KeyboardBuilder falls back to the geometric rule
         mSplitAnchors = Collections.unmodifiableList(anchors);
+        mSplitHalfWidthDp = prefs.getInt(Settings.PREF_SPLIT_HALF_WIDTH_DP, Defaults.PREF_SPLIT_HALF_WIDTH_DP);
+        mKeyboardHeightDp = prefs.getInt(Settings.PREF_KEYBOARD_HEIGHT_DP, Defaults.PREF_KEYBOARD_HEIGHT_DP);
         mQuickPinToolbarKeys = mToolbarMode == ToolbarMode.EXPANDABLE && prefs.getBoolean(Settings.PREF_QUICK_PIN_TOOLBAR_KEYS, Defaults.PREF_QUICK_PIN_TOOLBAR_KEYS);
 
         // Compute other readable settings

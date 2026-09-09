@@ -56,6 +56,10 @@ fun AppearanceScreen(
     if ((b?.value ?: 0) < 0)
         Log.v("irrelevant", "stupid way to trigger recomposition on preference change")
     val dayNightMode = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && prefs.getBoolean(Settings.PREF_THEME_DAY_NIGHT, Defaults.PREF_THEME_DAY_NIGHT)
+    val anySplitEnabled = prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD_LANDSCAPE, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
+            || prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
+            || prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD_FOLDED, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
+            || prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD_FOLDED_LANDSCAPE, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
     val items = listOf(
         R.string.settings_screen_theme,
         Settings.PREF_THEME_STYLE,
@@ -71,12 +75,10 @@ fun AppearanceScreen(
         SettingsWithoutKey.BACKGROUND_IMAGE_LANDSCAPE,
         R.string.settings_category_miscellaneous,
         Settings.PREF_ENABLE_SPLIT_KEYBOARD,
-        if (prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD_LANDSCAPE, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
-            || prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
-            || prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD_FOLDED, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
-            || prefs.getBoolean(Settings.PREF_ENABLE_SPLIT_KEYBOARD_FOLDED_LANDSCAPE, Defaults.PREF_ENABLE_SPLIT_KEYBOARD)
-            )
-            Settings.PREF_SPLIT_SPACER_SCALE_PREFIX else null,
+        if (anySplitEnabled) Settings.PREF_SPLIT_SPACER_SCALE_PREFIX else null,
+        if (anySplitEnabled) Settings.PREF_SPLIT_ANCHORS else null,
+        if (anySplitEnabled) Settings.PREF_SPLIT_HALF_WIDTH_DP else null,
+        Settings.PREF_KEYBOARD_HEIGHT_DP,
         if (prefs.getBoolean(Settings.PREF_THEME_KEY_BORDERS, Defaults.PREF_THEME_KEY_BORDERS))
             Settings.PREF_KEY_GAP_SCALE_PREFIX else null,
         Settings.PREF_KEYBOARD_HEIGHT_SCALE_PREFIX,
@@ -291,6 +293,24 @@ fun createAppearanceSettings(context: Context) = listOf(
             defaults = Defaults.PREF_BOTTOM_PADDING_SCALE,
             range = 0f..5f,
             description = { "${(100 * it).toInt()}%" }
+        ) { KeyboardSwitcher.getInstance().setThemeNeedsReload() }
+    },
+    Setting(context, Settings.PREF_SPLIT_HALF_WIDTH_DP, R.string.split_half_width) { setting ->
+        SliderPreference(
+            name = setting.title,
+            key = setting.key,
+            default = Defaults.PREF_SPLIT_HALF_WIDTH_DP,
+            range = 0f..600f,
+            description = { if (it <= 0) stringResource(R.string.size_dp_off) else "$it dp" }
+        ) { KeyboardSwitcher.getInstance().setThemeNeedsReload() }
+    },
+    Setting(context, Settings.PREF_KEYBOARD_HEIGHT_DP, R.string.keyboard_height_dp) { setting ->
+        SliderPreference(
+            name = setting.title,
+            key = setting.key,
+            default = Defaults.PREF_KEYBOARD_HEIGHT_DP,
+            range = 0f..400f,
+            description = { if (it <= 0) stringResource(R.string.size_dp_off) else "$it dp" }
         ) { KeyboardSwitcher.getInstance().setThemeNeedsReload() }
     },
     Setting(context, Settings.PREF_SIDE_PADDING_SCALE_PREFIX, R.string.prefs_side_padding_scale) { setting ->

@@ -72,7 +72,12 @@ public final class ResourceUtils {
         if (settingsValues.mIsFloatingKeyboard) {
             return settingsValues.mFloatingHeight;
         }
-        int defaultKeyboardHeight = getDefaultKeyboardHeight(res, settingsValues.mShowsNumberRow);
+        // a fixed dp height keeps the keyboard the same physical size on every device, instead of
+        // the per-bucket config_default_keyboard_height (205.6dp phone, 302.4dp sw768dp, ...)
+        final int defaultKeyboardHeight = settingsValues.mKeyboardHeightDp > 0
+                ? (int)(settingsValues.mKeyboardHeightDp * res.getDisplayMetrics().density
+                        * (settingsValues.mShowsNumberRow ? 1.33f : 1f))
+                : getDefaultKeyboardHeight(res, settingsValues.mShowsNumberRow);
         return (int)(defaultKeyboardHeight * settingsValues.mKeyboardHeightScale);
     }
 
